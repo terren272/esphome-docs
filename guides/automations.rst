@@ -603,6 +603,15 @@ a shorthand way of writing a ``while`` action with an empty ``then`` block.)
           binary_sensor.is_on: some_binary_sensor
       - logger.log: "Binary sensor is ready"
 
+# In a trigger with timeout:
+    on_...:
+      - logger.log: "Waiting for binary sensor"
+      - wait_until:
+          condition:
+            binary_sensor.is_on: some_binary_sensor
+          timeout: 10s         # THIS IS HOW TO USE TIMEOUT.  ACCEPTS LAMBDAS
+      - logger.log: "Binary sensor is ready or timed out"
+
 Configuration variables:
 
 - **condition** (**Required**): The condition to wait to become true. See :ref:`Conditions <config-condition>`.
